@@ -83,7 +83,7 @@ server.get("/search", (req, res) => {
 
     if(search == ""){
         //pesquisa vazia
-        return res.render("search-results.html", { places: rows, total: total });
+        return res.render("search-results.html", { total: 0 });
     }
 
 
@@ -96,10 +96,9 @@ server.get("/search", (req, res) => {
         const total = rows.length;
 
         //mostrar a pagina html com os dados do html
-        return res.render("search-results.html", { places: rows, total: total });
+        return res.render("search-results.html", { places: rows, total });
 
     });
-
 })
 
 // ligar o servidor
