@@ -19,18 +19,13 @@ nunjucks.configure("src/views", {
 
 
 //configurar caminhos da aplicacao
-
-//pagina inicial
-//req: requisicao
-//res: respsotas
 server.get("/", (req, res) => {
-    return res.render("index.html");
+    return res.render('index.html'); //, { title: 'Um título' }
 })
 
 server.get("/create-point", (req, res) => {
-
-    //req.query: query strings da url
-    // req.query
+    // req.query: Query Strings da nossa url
+    // console.log(req.query)
 
     return res.render("create-point.html");
 })
@@ -50,7 +45,8 @@ server.post("/savepoint", (req, res) => {
             city, 
             itens
         ) values (?, ?, ?, ?, ?, ?, ?);
-    `
+    `;
+
     const values = [
         req.body.image,
         req.body.name,
@@ -59,7 +55,7 @@ server.post("/savepoint", (req, res) => {
         req.body.state,
         req.body.city,
         req.body.itens
-    ]
+    ];
 
     function afterInsertData(err) {
         if(err) {
@@ -74,9 +70,7 @@ server.post("/savepoint", (req, res) => {
     };
 
     db.run(query, values, afterInsertData);
-
-    
-})
+});
 
 server.get("/search", (req, res) => {
     const search = req.query.search;
@@ -88,7 +82,7 @@ server.get("/search", (req, res) => {
 
 
     //pegar dados do banco de dados
-    db.all(`select * from places where city like `%{search}`%`, function(err, rows) {
+    db.all(`select * from places where city like '%${search}%'`, function(err, rows) {
         if(err) {
             return console.log(err);
         }
@@ -96,7 +90,7 @@ server.get("/search", (req, res) => {
         const total = rows.length;
 
         //mostrar a pagina html com os dados do html
-        return res.render("search-results.html", { places: rows, total });
+        return res.render("search-results.html", { places: rows, total: total });
 
     });
 })

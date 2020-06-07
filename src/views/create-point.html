@@ -2,19 +2,20 @@
 
 {% set pageId = "page-create-point" %}
 
+{% block title %}
+    <title>Criar um ponto de coleta</title>
+{% endblock title %}
+
 {% block styles %}
     <link rel="stylesheet" href="./styles/create-point.css">
     <link rel="stylesheet" href="./styles/modal.css">
 {% endblock styles %}
 
-{% block title %}
-    <title>Criar um ponto de coleta</title>
-{% endblock title %}
 
 {% block content %}
     {% include "partials/page-header.html" %}
 
-    <form action="/savepoint" method="posto">
+    <form action="/savepoint" method="post">
         <h1>Cadastro do ponto de coleta</h1>
         <!-- colecao de campos -->
         <fieldset>

@@ -3,7 +3,7 @@ function populateUFs() {
     fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
         .then(res =>  res.json() )    
         .then( states => {
-            for(state of states){
+            for(const state of states){
                 ufSelect.innerHTML += `<option value="${state.id}">${state.nome}</option>`
             }
         } )
@@ -59,7 +59,7 @@ function handleSelectedItem(event) {
     itemLi.classList.toggle("selected");
 
     const itemId = itemLi.dataset.id;
-    console.log('Item ID: ', itemId);
+    // console.log('Item ID: ', itemId);
 
     
     //verifica se tem itens selecionados, se sim pegar itens selecionados
@@ -67,7 +67,7 @@ function handleSelectedItem(event) {
         const itemFound = item == itemId; //isso sera true ou false
         return itemFound; // retorna true ou false
     })
-    console.log()
+    // console.log()
 
     //se ja estiver selecionado tirar da selecao
     if(alreadySelected >= 0){
@@ -80,7 +80,7 @@ function handleSelectedItem(event) {
     } else{ //se nao estiver selecionado tirar a selecao
         selectItens.push(itemId);
     }
-    console.log('selectedItens: ', selectItens);
+    // console.log('selectedItens: ', selectItens);
     
     //atualizar o campo escondido com os itens selecionados
     collectedItens.value = selectItens;
